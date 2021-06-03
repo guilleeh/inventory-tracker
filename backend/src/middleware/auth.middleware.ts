@@ -1,0 +1,15 @@
+const jwtMiddleware = require("jsonwebtoken");
+
+const authorize = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    jwtMiddleware.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (error) {
+    res.status(401).json({ success: false, error: "Authentication failed." });
+  }
+};
+
+module.exports = {
+  authorize,
+};
