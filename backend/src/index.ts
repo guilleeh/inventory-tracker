@@ -10,6 +10,8 @@ app.use(express.json());
 
 app.use("/api", routes);
 
-const server = app.listen(3001, () =>
+const PORT = process.env.PORT || 3001;
+
+const server = app.listen(PORT, () =>
   console.log("🚀 Server ready at: http://localhost:3001")
 );
