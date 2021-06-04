@@ -43,7 +43,25 @@ const editInventoryItem = async (
   id: number
 ) => {
   try {
-    return await inventoryDb.editInventoryItemDb(name, type, quantity, id);
+    if (quantity === 0) {
+      // delete the item
+      const item = await inventoryDb.deleteInventoryItemDb(id);
+      const user = await authDB.getSingleUserByIdDb(item.userId);
+      // send email
+      await emailLib.sendEmail(
+        user.email,
+        "Your item has been deleted!",
+        `Your item: ${item.name}, has hit a quantity of 0.`
+      );
+      return item;
+    }
+    const item = await inventoryDb.editInventoryItemDb(
+      name,
+      type,
+      quantity,
+      id
+    );
+    return item;
   } catch (e) {
     throw new Error(e.message);
   }
@@ -53,7 +71,6 @@ const deleteInventoryItem = async (id: number) => {
   try {
     const item = await inventoryDb.deleteInventoryItemDb(id);
     const user = await authDB.getSingleUserByIdDb(item.userId);
-    console.log(user.email);
     // send email
     await emailLib.sendEmail(
       user.email,

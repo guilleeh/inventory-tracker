@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router';
 
 export const apiFetch = async (
   url: string,
@@ -23,6 +24,9 @@ export const apiFetch = async (
 
       return response.data;
     } catch (e) {
+      if (e?.response?.status === 401) {
+        Router.push('/login');
+      }
       return e.response.data;
     }
   } else if (method.toLowerCase() === 'post') {
@@ -31,6 +35,9 @@ export const apiFetch = async (
 
       return response.data;
     } catch (e) {
+      if (e?.response?.status === 401) {
+        Router.push('/login');
+      }
       return e.response.data;
     }
   } else if (method.toLowerCase() === 'put') {
@@ -39,6 +46,9 @@ export const apiFetch = async (
 
       return response.data;
     } catch (e) {
+      if (e?.response?.status === 401) {
+        Router.push('/login');
+      }
       return e.response.data;
     }
   }

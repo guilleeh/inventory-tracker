@@ -6,10 +6,10 @@ const sendEmail = async (to: string, subject: string, text: string) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.mail.com",
     port: 465,
-    secure: true, // true for 465, false for other ports
+    secure: true,
     auth: {
-      user: process.env.MAIL_USERNAME, // generated ethereal user
-      pass: process.env.MAIL_PASSWORD, // generated ethereal password
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
