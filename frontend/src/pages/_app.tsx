@@ -1,6 +1,19 @@
-import { AppProps } from 'next/app';
-import '@/styles/global.css';
+import App, { AppProps } from 'next/app';
+import { ThemeProvider } from 'styled-components';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+import theme from '../styles/theme';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+};
+
+export default MyApp;
