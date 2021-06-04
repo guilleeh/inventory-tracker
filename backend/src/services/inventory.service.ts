@@ -1,4 +1,6 @@
 const inventoryDb = require("../db/inventory.db");
+const authDB = require("../db/auth.db");
+const emailLib = require("../lib/email");
 
 const getAllInventoryItems = async (id: number) => {
   try {
@@ -49,7 +51,16 @@ const editInventoryItem = async (
 
 const deleteInventoryItem = async (id: number) => {
   try {
-    return await inventoryDb.deleteInventoryItemDb(id);
+    const item = await inventoryDb.deleteInventoryItemDb(id);
+    const user = await authDB.getSingleUserByIdDb(item.userId);
+    console.log(user.email);
+    // send email
+    await emailLib.sendEmail(
+      user.email,
+      "Your item has been deleted!",
+      `Your item: ${item.name}, has been deleted.`
+    );
+    return item;
   } catch (e) {
     throw new Error(e.message);
   }
