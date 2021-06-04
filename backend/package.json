@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
+    "start": "ts-node src/index.ts",
+    "build": "tsc -p ."
   },
   "dependencies": {
     "@prisma/client": "2.23.0",
