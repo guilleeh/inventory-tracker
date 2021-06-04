@@ -23,7 +23,7 @@ Live site : [https://inventory-tracker.vercel.app/](https://inventory-tracker.ve
 - Deployment
   - Netlify & Heroku
 
-## Run localy
+## Run locally
 
 **Important:** You need to have a local psql database running in your system. 
 
