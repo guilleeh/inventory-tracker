@@ -3,9 +3,9 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (to: string, subject: string, text: string) => {
   console.log(process.env.MAIL_HOST, process.env.MAIL_PORT);
   const transporter = nodemailer.createTransport({
-    host: "smtp.mail.com",
-    port: 465,
-    secure: true,
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
+    secure: false,
     auth: {
       user: process.env.MAIL_USERNAME,
       pass: process.env.MAIL_PASSWORD,
@@ -13,8 +13,9 @@ const sendEmail = async (to: string, subject: string, text: string) => {
   });
 
   // send mail with defined transport object
+  console.log(to);
   const info = await transporter.sendMail({
-    from: `"Inventory Tracker 👻" <${process.env.MAIL_USERNAME}>`, // sender address
+    from: `Inventory Tracker 👻 <${process.env.MAIL_USERNAME}>`, // sender address
     to,
     subject,
     text,
