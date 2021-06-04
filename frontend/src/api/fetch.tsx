@@ -8,14 +8,14 @@ export const apiFetch = async (
   body: Object,
   isAuth = false,
 ) => {
-  const options = {
+  let options = {
     withCredentials: false,
     params,
     headers: {},
   };
   if (isAuth) {
     const jwt = localStorage.getItem('jwt');
-    options.headers.Authorization = `Bearer ${jwt}`;
+    options.headers['Authorization'] = `Bearer ${jwt}`;
   }
 
   if (method.toLowerCase() === 'get') {
