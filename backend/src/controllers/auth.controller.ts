@@ -83,7 +83,9 @@ const postLoginUser = async (req, res, next) => {
 
     // get jwt
     const jwtToken = await authService.getJWT(user.id, user.email);
-    res.status(200).json({ success: true, data: jwtToken });
+    res
+      .status(200)
+      .json({ success: true, data: { jwt: jwtToken, id: user.id } });
     next();
   } catch (e) {
     res.sendStatus(500) && next(e);

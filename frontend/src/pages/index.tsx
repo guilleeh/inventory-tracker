@@ -10,6 +10,9 @@ export default function Home() {
           Inventory Tracker
         </Text>
         <Box mx="auto" />
+        <Link variant="nav" href="/signup" fontSize={[2, 3]} pr={2}>
+          Sign Up
+        </Link>
         <Link variant="nav" href="/login" fontSize={[2, 3]}>
           Login
         </Link>

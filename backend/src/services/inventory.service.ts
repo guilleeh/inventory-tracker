@@ -8,13 +8,27 @@ const getAllInventoryItems = async (id: number) => {
   }
 };
 
+const getSingleInventoryItem = async (id: number) => {
+  try {
+    return await inventoryDb.getSingleInventoryItemDb(id);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 const createNewInventoryItem = async (
   name: string,
   type: string,
+  quantity: number,
   email: string
 ) => {
   try {
-    return await inventoryDb.createNewInventoryItemDb(name, type, email);
+    return await inventoryDb.createNewInventoryItemDb(
+      name,
+      type,
+      quantity,
+      email
+    );
   } catch (e) {
     throw new Error(e.message);
   }
@@ -43,6 +57,7 @@ const deleteInventoryItem = async (id: number) => {
 
 module.exports = {
   getAllInventoryItems,
+  getSingleInventoryItem,
   createNewInventoryItem,
   editInventoryItem,
   deleteInventoryItem,

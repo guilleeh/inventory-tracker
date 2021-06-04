@@ -27,6 +27,14 @@ router.post(
 
 // edit item
 
+router.get(
+  "/item/:id",
+  authorizeMiddleware.authorize,
+  inventoryController.getSingleItem
+);
+
+// edit item
+
 router.put(
   "/item/:id",
   authorizeMiddleware.authorize,
@@ -35,7 +43,7 @@ router.put(
 
 // delete item
 
-router.delete(
+router.post(
   "/item/:id",
   authorizeMiddleware.authorize,
   inventoryController.deleteItem

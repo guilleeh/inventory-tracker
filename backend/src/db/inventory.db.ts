@@ -3,21 +3,31 @@ const prisma = new PrismaClient();
 
 const getAllInventoryItemsDb = async (id: number) => {
   const items = await prisma.item.findMany({
-    where: { id },
+    where: { userId: id },
   });
 
   return items;
 };
 
+const getSingleInventoryItemDb = async (id: number) => {
+  const item = await prisma.item.findFirst({
+    where: { id },
+  });
+
+  return item;
+};
+
 const createNewInventoryItemDb = async (
   name: string,
   type: string,
+  quantity: number,
   email: string
 ) => {
   const items = await prisma.item.create({
     data: {
       name,
       type,
+      quantity,
       user: {
         connect: {
           email,
@@ -61,6 +71,7 @@ const deleteInventoryItemDb = async (id: number) => {
 
 module.exports = {
   getAllInventoryItemsDb,
+  getSingleInventoryItemDb,
   createNewInventoryItemDb,
   editInventoryItemDb,
   deleteInventoryItemDb,

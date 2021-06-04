@@ -17,14 +17,43 @@ const getAllInventory = async (req, res, next) => {
   }
 };
 
+const getSingleItem = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const numId = Number(id);
+    if (Number.isNaN(numId)) {
+      res.status(400).json({ success: false, error: "Id must be a number." });
+      return;
+    }
+    const items = await inventoryService.getSingleInventoryItem(numId);
+    res.status(200).json({ success: true, data: items });
+    next();
+  } catch (e) {
+    res.sendStatus(500) && next(e);
+  }
+};
+
 const postNewItem = async (req, res, next) => {
   try {
     const { name, type, id, quantity } = req.body;
-    const user = await auth.getSingleUserById(id);
+    const numId = Number(id);
+    const quant = Number(quantity);
+    if (Number.isNaN(numId)) {
+      res.status(400).json({ success: false, error: "Id must be a number." });
+      return;
+    }
+    if (Number.isNaN(quant)) {
+      res
+        .status(400)
+        .json({ success: false, error: "Quantity must be a number." });
+      return;
+    }
+    const user = await auth.getSingleUserById(numId);
     const email = user.email;
     const item = await inventoryService.createNewInventoryItem(
       name,
       type,
+      quant,
       email
     );
     res.status(200).json({ success: true, data: item });
@@ -37,11 +66,23 @@ const postNewItem = async (req, res, next) => {
 const putItem = async (req, res, next) => {
   try {
     const { name, type, id, quantity } = req.body;
+    const numId = Number(id);
+    const quant = Number(quantity);
+    if (Number.isNaN(numId)) {
+      res.status(400).json({ success: false, error: "Id must be a number." });
+      return;
+    }
+    if (Number.isNaN(quant)) {
+      res
+        .status(400)
+        .json({ success: false, error: "Quantity must be a number." });
+      return;
+    }
     const item = await inventoryService.editInventoryItem(
       name,
       type,
-      quantity,
-      id
+      quant,
+      numId
     );
     res.status(200).json({ success: true, data: item });
     next();
@@ -63,6 +104,7 @@ const deleteItem = async (req, res, next) => {
 
 module.exports = {
   getAllInventory,
+  getSingleItem,
   postNewItem,
   putItem,
   deleteItem,
