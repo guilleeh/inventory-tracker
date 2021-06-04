@@ -46,3 +46,7 @@ Live site : [https://inventory-tracker.vercel.app/](https://inventory-tracker.ve
 3. set .env according to env_sample.txt
 
 4. npm run dev
+
+
+# Deployment(Backend)
+1. git subtree push --prefix backend heroku master
