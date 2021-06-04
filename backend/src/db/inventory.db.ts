@@ -29,7 +29,39 @@ const createNewInventoryItemDb = async (
   return items;
 };
 
+const editInventoryItemDb = async (
+  name: string,
+  type: string,
+  quantity: number,
+  id: number
+) => {
+  const item = await prisma.item.update({
+    where: {
+      id,
+    },
+    data: {
+      name,
+      type,
+      quantity,
+    },
+  });
+
+  return item;
+};
+
+const deleteInventoryItemDb = async (id: number) => {
+  const item = await prisma.item.delete({
+    where: {
+      id,
+    },
+  });
+
+  return item;
+};
+
 module.exports = {
   getAllInventoryItemsDb,
   createNewInventoryItemDb,
+  editInventoryItemDb,
+  deleteInventoryItemDb,
 };

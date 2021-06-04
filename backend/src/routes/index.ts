@@ -25,4 +25,20 @@ router.post(
   inventoryController.postNewItem
 );
 
+// edit item
+
+router.put(
+  "/item/:id",
+  authorizeMiddleware.authorize,
+  inventoryController.putItem
+);
+
+// delete item
+
+router.delete(
+  "/item/:id",
+  authorizeMiddleware.authorize,
+  inventoryController.deleteItem
+);
+
 module.exports = router;

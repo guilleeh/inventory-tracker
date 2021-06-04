@@ -19,7 +19,7 @@ const getAllInventory = async (req, res, next) => {
 
 const postNewItem = async (req, res, next) => {
   try {
-    const { name, type, id } = req.body;
+    const { name, type, id, quantity } = req.body;
     const user = await auth.getSingleUserById(id);
     const email = user.email;
     const item = await inventoryService.createNewInventoryItem(
@@ -34,7 +34,36 @@ const postNewItem = async (req, res, next) => {
   }
 };
 
+const putItem = async (req, res, next) => {
+  try {
+    const { name, type, id, quantity } = req.body;
+    const item = await inventoryService.editInventoryItem(
+      name,
+      type,
+      quantity,
+      id
+    );
+    res.status(200).json({ success: true, data: item });
+    next();
+  } catch (e) {
+    res.sendStatus(500) && next(e);
+  }
+};
+
+const deleteItem = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    const item = await inventoryService.deleteInventoryItem(id);
+    res.status(200).json({ success: true, data: item });
+    next();
+  } catch (e) {
+    res.sendStatus(500) && next(e);
+  }
+};
+
 module.exports = {
   getAllInventory,
   postNewItem,
+  putItem,
+  deleteItem,
 };

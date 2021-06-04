@@ -20,7 +20,8 @@ model item {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name     String
-  type   String
+  type     String
+  quantity Int? @default(1)
   user    user?    @relation(fields: [userId], references: [id])
   userId  Int?
 }
