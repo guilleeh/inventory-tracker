@@ -28,7 +28,13 @@ export default function SignUp() {
   return (
     <div>
       <Flex px={2} color="white" alignItems="center">
-        <Text p={2} fontWeight="bold" fontSize={[2, 3]}>
+        <Text
+          p={2}
+          fontWeight="bold"
+          fontSize={[2, 3]}
+          onClick={() => router.push('/')}
+          style={{ cursor: 'pointer' }}
+        >
           Inventory Tracker
         </Text>
         <Box mx="auto" />

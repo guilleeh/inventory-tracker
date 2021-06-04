@@ -1,14 +1,20 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Text, Box, Link, Heading, Button } from 'rebass';
-import { Flex } from '../components/nav';
+import { Flex, Nav } from '../components/nav';
 
 export default function Home() {
   const router = useRouter();
   return (
     <div>
       <Flex px={2} color="white" alignItems="center">
-        <Text p={2} fontWeight="bold" fontSize={[2, 3]}>
+        <Text
+          p={2}
+          fontWeight="bold"
+          fontSize={[2, 3]}
+          style={{ cursor: 'pointer' }}
+          onClick={() => router.push('/')}
+        >
           Inventory Tracker
         </Text>
         <Box mx="auto" />

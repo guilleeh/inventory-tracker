@@ -4,8 +4,8 @@ const sendEmail = async (to: string, subject: string, text: string) => {
   const testAccount = await nodemailer.createTestAccount();
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.mail.com",
-    port: 465,
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     secure: true,
     auth: {
       user: process.env.MAIL_USERNAME,
