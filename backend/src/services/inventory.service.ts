@@ -48,11 +48,15 @@ const editInventoryItem = async (
       const item = await inventoryDb.deleteInventoryItemDb(id);
       const user = await authDB.getSingleUserByIdDb(item.userId);
       // send email
-      await emailLib.sendEmail(
-        user.email,
-        "Your item has been deleted!",
-        `Your item: ${item.name}, has hit a quantity of 0.`
-      );
+      try {
+        await emailLib.sendEmail(
+          user.email,
+          "Your item has been deleted!",
+          `Your item: ${item.name}, has been deleted.`
+        );
+      } catch (e) {
+        console.log(e);
+      }
       return item;
     }
     const item = await inventoryDb.editInventoryItemDb(
@@ -72,11 +76,15 @@ const deleteInventoryItem = async (id: number) => {
     const item = await inventoryDb.deleteInventoryItemDb(id);
     const user = await authDB.getSingleUserByIdDb(item.userId);
     // send email
-    await emailLib.sendEmail(
-      user.email,
-      "Your item has been deleted!",
-      `Your item: ${item.name}, has been deleted.`
-    );
+    try {
+      await emailLib.sendEmail(
+        user.email,
+        "Your item has been deleted!",
+        `Your item: ${item.name}, has been deleted.`
+      );
+    } catch (e) {
+      console.log(e);
+    }
     return item;
   } catch (e) {
     throw new Error(e.message);
