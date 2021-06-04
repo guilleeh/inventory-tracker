@@ -20,11 +20,12 @@ const getSingleUserByIdDb = async (id: number) => {
 };
 
 // CREATE
-const createUserDb = async (email: string, password: string) => {
+const createUserDb = async (email: string, password: string, name: string) => {
   const result = await prisma.user.create({
     data: {
       email,
       password,
+      name,
     },
   });
   return result;

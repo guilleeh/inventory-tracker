@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Text, Box, Link, Heading, Button } from 'rebass';
 import { Label, Input, Select, Textarea, Radio, Checkbox } from '@rebass/forms';
 import Loader from 'react-loader-spinner';
-import { Flex } from '../components/nav';
+import { Flex, Nav } from '../components/nav';
 import { apiFetch } from '../api/fetch';
 
 export default function Inventory() {
@@ -48,15 +48,7 @@ export default function Inventory() {
 
   return (
     <div>
-      <Flex px={2} color="white" alignItems="center">
-        <Text p={2} fontWeight="bold" fontSize={[2, 3]}>
-          Inventory Tracker
-        </Text>
-        <Box mx="auto" />
-        <Link variant="nav" href="/login" fontSize={[2, 3]}>
-          Logout
-        </Link>
-      </Flex>
+      <Nav />
       {!items ? (
         <Flex
           backgroundColor="#e7e7e7e"

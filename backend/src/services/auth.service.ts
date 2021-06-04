@@ -2,11 +2,11 @@ const authDb = require("../db/auth.db");
 const bcrypt = require("bcrypt");
 const jwtService = require("jsonwebtoken");
 
-const createUser = async (email: string, password: string) => {
+const createUser = async (email: string, password: string, name: string) => {
   try {
     const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
     const passwordHash: string = await bcrypt.hash(password, salt);
-    return await authDb.createUserDb(email, passwordHash);
+    return await authDb.createUserDb(email, passwordHash, name);
   } catch (e) {
     throw new Error(e.message);
   }

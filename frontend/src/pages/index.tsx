@@ -1,8 +1,10 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Text, Box, Link, Heading, Button } from 'rebass';
 import { Flex } from '../components/nav';
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div>
       <Flex px={2} color="white" alignItems="center">
@@ -45,6 +47,7 @@ export default function Home() {
           color="#EDF4ED"
           style={{ cursor: 'pointer' }}
           fontSize={[1]}
+          onClick={() => router.push('/login')}
         >
           Log in
         </Button>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Text, Box, Link, Heading, Button } from 'rebass';
 import { Label, Input, Select, Textarea, Radio, Checkbox } from '@rebass/forms';
 import Loader from 'react-loader-spinner';
-import { Flex } from '../../components/nav';
+import { Flex, Nav } from '../../components/nav';
 import { apiFetch } from '../../api/fetch';
 import { Router } from 'next/router';
 
@@ -39,15 +39,7 @@ export default function New() {
 
   return (
     <div>
-      <Flex px={2} color="white" alignItems="center">
-        <Text p={2} fontWeight="bold" fontSize={[2, 3]}>
-          Inventory Tracker
-        </Text>
-        <Box mx="auto" />
-        <Link variant="nav" href="/login" fontSize={[2, 3]}>
-          Logout
-        </Link>
-      </Flex>
+      <Nav />
       <Flex
         backgroundColor="#e7e7e7e"
         paddingTop="100px"

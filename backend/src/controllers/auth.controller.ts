@@ -37,19 +37,22 @@ const getUser = async (req, res, next) => {
 // POST
 
 const postCreateUser = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
-  if (!email || !password) {
+  if (!email || !password || !name) {
     res
       .status(400)
-      .json({ success: false, error: "Email and password are required." });
+      .json({
+        success: false,
+        error: "Email and password and name are required.",
+      });
     next();
     return;
   }
 
   try {
-    const json = await authService.createUser(email, password);
-    res.json(json);
+    const json = await authService.createUser(email, password, name);
+    res.json({ success: true, data: json });
     next();
   } catch (e) {
     res.sendStatus(500) && next(e);
